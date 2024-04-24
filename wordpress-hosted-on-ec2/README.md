@@ -36,7 +36,7 @@ For simplicity, We will use the default VPC to launch our website:
 Check this [link](https://laraadeboye.hashnode.dev/how-to-configure-and-deploy-amazon-vpc-for-a-3-tier-web-app) for a reference to create a VPC for a three-tier web application.
 
 
-
+&nbsp;
 
 ## Step 1. Launch an EC2 instance. 
 You can launch an EC2 instance from the command line using AWS CLI or from the AWS console. To launch EC2 from the command line, the prerequisite is to download AWS CLI from the [documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html)
@@ -59,6 +59,7 @@ Alternatively we can launch EC2 using the AWS CLI with the AWS CLI using the com
 #
     aws ec2 run-instances --image-id <ami-xxxxxxxx> --count 1 --instance-type t2.micro --key-name <MyKeyPair> --security-group-ids <sg-903004f8> --subnet-id <subnet-6e7f829e>
 
+&nbsp;
 
 ## Step 2. Install prerequisites. 
 
@@ -81,7 +82,37 @@ Install MYSQL server
 #
     sudo apt install mysql-server
 
+&nbsp;
+
 ##  Step 3. Configure MYSQL server and create a new database for wordpress
+
+1. Login to MySQL server
+#
+    sudo mysql -u root
+
+2. Change authentication plugin to mysql_native_password. It is important to use a [strong password](https://support.microsoft.com/en-us/windows/create-and-use-strong-passwords-c5cebb49-8c53-4f5e-2bc4-fe357ca048eb#:~:text=At%20least%2012%20characters%20long,different%20from%20your%20previous%20passwords.). 
+
+#
+    ALTER USER 'root'@localhost IDENTIFIED WITH mysql_native_password BY '<newpassword>';
+
+3. Create a new database user for wordpress  named **wp_user**(Remember to use a strong password)
+#
+    CREATE USER 'wp_user'@localhost IDENTIFIED BY '<strong password>'; 
+
+4. Create a new database called **wp**
+#
+    CREATE DATABASE wp;
+
+5.  Grant all privilges on the database 'wp' to the newly created user. (Note the regex in the command)
+#
+    GRANT ALL PRIVILEGES ON wp.* TO 'wp_user'@localhost;
+
+6. Exit the MYSQL server to return to the ubuntu wordpress-server terminal
+#
+    exit
+
+&nbsp;
+
 ##   Step 4. Install and Configure wordPress.
 ## Step 5. Install SSL on the Website.
 ## Conclusion
