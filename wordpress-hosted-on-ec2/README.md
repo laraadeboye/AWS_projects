@@ -10,6 +10,16 @@ This project will set up a WordPress website on an Amazon Elastic Compute Cloud 
 
 **My Role:** As a Cloud Architect, I will design and implement a scalable solution using AWS EC2. Launching an EC2 instance with appropriate resources, I configure a LAMP stack (Linux, Apache, MySQL, PHP) to run WordPress, and install the WooCommerce plugin for e-commerce functionality.
 
+&nbsp;
+
+## Overview
+WordPress is an open-source content management system that is written in PHP. It relies on LAMP stack for its operation. LAMP stands for Linux, Apache (or Nginx), MYSQL and PHP respectively. 
+A webserver is a software that listens for requests on specific ports (usually 80 for Http traffic) from a browser and delivers contents. Examples of webservers are Apache, Nginx, Microsoft IIS.
+
+When a webserver receives  a request, it locates the appropriate response on the filesystem of the server, processes it by using scripting languages such as PHP and sends the appropriate response to the web browser.
+
+Typically, a DevOps engineer is responsible for server management, to ensure that the LAMP stack is properly configured and maintained; security hardening to protect the website form vulnerabilities; VersionControl and Deployments and Performance optimization, to ensure fast loading times and a smooth user experience.
+
 ## Outline
 Step 0. Create a VPC
 
@@ -47,7 +57,7 @@ From the console: Create an EC2 instance with the following parameters:
 * **Name**: wordpress-server
 * **AMI**: Ubuntu Server 22.04 LTS (Free tier Eligible)
 * **Instance type**: t2.micro
-* **Key pair**: Create new key pair
+* **Key pair**: Create new key pair named **wp-key**
 * **Network**: Use Default VPC
 Under Network, **Create new security group:** (Allow SSH from port 22, Allow Http from port 80 and HTTPS from port 443)
 * For the remaining configurations, accept default and Create the instance
@@ -63,7 +73,8 @@ Alternatively we can launch EC2 using the AWS CLI with the AWS CLI using the com
 
 ## Step 2. Install prerequisites. 
 
-1. Install Apache server on the Ubuntu machine
+1. We will install an Apache webserver on our virtual machine.
+
 We should have ssh-ed into the machine. We will install the Apache web server and SQL on our Ubuntu machine.
 
 First update the VM:
