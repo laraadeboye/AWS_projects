@@ -1,4 +1,4 @@
-# Creating and Hosting a Wordpress website on an EC2 instance
+# Creating and Hosting a WordPress website on an EC2 instance
 
 This project will set up a WordPress website on an Amazon Elastic Compute Cloud (EC2) instance. Hosting a website on EC2 provides the following benefits:
 
@@ -39,7 +39,7 @@ Check this [link](https://laraadeboye.hashnode.dev/how-to-configure-and-deploy-a
 &nbsp;
 
 ## Step 1. Launch an EC2 instance. 
-You can launch an EC2 instance from the command line using AWS CLI or from the AWS console. To launch EC2 from the command line, the prerequisite is to download AWS CLI from the [documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html)
+You can launch an EC2 instance from the command line using AWS CLI or from the AWS console. To launch EC2 from the command line, the prerequisite is to download AWS CLI from the [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html)
 
 Follow the steps to configure cmd (in windows) or terminal (in linux) to use AWS CLI
 
@@ -114,5 +114,29 @@ Install MYSQL server
 &nbsp;
 
 ##   Step 4. Install and Configure wordPress.
+
+1. Download wordPress by running the following command:
+#
+    wget https://wordpress.org/latest.tar.gz -P /tmp
+
+2. Unzip the archive file using the tar utility
+#
+    tar -xvf latest.tar.gz
+3. We will move the wordpres folder to the apache root document
+#
+    sudo mv wordpress/ /var/www/html
+4. We will restart the apache web server 
+#
+    sudo systemctl restart apache2
+    
+
 ## Step 5. Install SSL on the Website.
+1. To install SSL on our website to secure it, we will first update the webserver, then install certbox with the following commands:
+#
+    sudo apt-get update
+    sudo apt install certbot python3-certbot-apache
+
+2. Install ssl on the website with certbox
+#
+    sudo certbot --apache
 ## Conclusion
