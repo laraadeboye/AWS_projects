@@ -71,27 +71,38 @@ Alternatively we can launch EC2 using the AWS CLI with the AWS CLI using the com
 
 &nbsp;
 
+2. Assign an Elastic IP address. An Elastic IP is a public IPv4 address helps to ensure that the IP address of our server does not change if we stop or reboot our instance. It allows us to maintain a consistent connectivity to our resource. ( Note that AWS charges a small fee for the use of an Elastic IP). 
+
+
 ## Step 2. Install prerequisites. 
 
 1. We will install an Apache webserver on our virtual machine.
 
 We should have ssh-ed into the machine. We will install the Apache web server and SQL on our Ubuntu machine.
 
-First update the VM:
+1. First update the VM:
 #
     sudo apt update -y
 
-Install Apache server on Ubuntu:
+2. Install Apache server on Ubuntu:
 #
-    sudo apt install apache2
+    sudo apt install apache2 -y
 
-Word press is based on php and mysql runtime connectorInstall php runtime and php mysql connector:
-#
-    sudo apt install php libapache2-mod-php php-mysql
+To verify the installation of the Apache server, visit the public IP of the instance on a web browser. (Note: Use http, not https)
 
-Install MYSQL server
 #
-    sudo apt install mysql-server
+    http://[PUBLIC_IP]
+
+[IMAGE SAVED FOR UPLOAD]
+
+
+3. Word press is based on php and mysql runtime connector. Install php runtime and php mysql connector:
+#
+    sudo apt install php libapache2-mod-php php-mysql -y
+
+4. Install MYSQL server
+#
+    sudo apt install mysql-server -y
 
 &nbsp;
 
@@ -101,7 +112,10 @@ Install MYSQL server
 #
     sudo mysql -u root
 
-2. Change authentication plugin to mysql_native_password. It is important to use a [strong password](https://support.microsoft.com/en-us/windows/create-and-use-strong-passwords-c5cebb49-8c53-4f5e-2bc4-fe357ca048eb#:~:text=At%20least%2012%20characters%20long,different%20from%20your%20previous%20passwords.). 
+2. Change authentication plugin to a mysql_native_password. mysql_native_password is a more secure authetication plugin compared to older options. For compatibility sake, newer versions of MYSQL being used with newer versions of WordPress require mysql_native_password. It is important to use a [strong password](https://support.microsoft.com/en-us/windows/create-and-use-strong-passwords-c5cebb49-8c53-4f5e-2bc4-fe357ca048eb#:~:text=At%20least%2012%20characters%20long,different%20from%20your%20previous%20passwords.). 
+
+*TROUBLESHOOTING TIP*:
+*If you're encountering issues during installation and are using a newer MySQL version, verify the authentication plugin is set to mysql_native_password.*
 
 #
     ALTER USER 'root'@localhost IDENTIFIED WITH mysql_native_password BY '<newpassword>';
@@ -114,34 +128,135 @@ Install MYSQL server
 #
     CREATE DATABASE wp;
 
-5.  Grant all privilges on the database 'wp' to the newly created user. (Note the regex in the command)
+5.  Grant all privileges on the database 'wp' to the newly created user. (Note the regex in the command)
 #
     GRANT ALL PRIVILEGES ON wp.* TO 'wp_user'@localhost;
 
 6. Exit the MYSQL server to return to the ubuntu wordpress-server terminal
 #
-    exit
+    exit 
+or exit with keyboard shortcut Ctrl+D
+
+Note that the database configuration details should be saved as they will be used in a later step.
 
 &nbsp;
 
 ##   Step 4. Install and Configure wordPress.
+Visit [wordpress.org](https://wordpress.org/download/releases/) to get the link of the latest archive file for download
 
-1. Download wordPress by running the following command:
+1. Download wordPress into the /tmp directory by running the following commands:
 #
-    wget https://wordpress.org/latest.tar.gz -P /tmp
+    cd /tmp
+#
+    wget https://wordpress.org/latest.tar.gz 
+
+The above command will download the latest wordPress release.
+
+Run the ls commant to confirm that the archive has been downloaded.
+#
+    ls
+
 
 2. Unzip the archive file using the tar utility
 #
     tar -xvf latest.tar.gz
-3. We will move the wordpres folder to the apache root document
+
+Running the ls command again will show a new folder called **wordpress** in the current directory
+
+3. We will move the wordpress folder to the apache document root
 #
     sudo mv wordpress/ /var/www/html
-4. We will restart the apache web server 
+
+4. Verify the move by listing the /var/www/html directory:
+#
+    ls /var/www/html
+    SS
+5. Navigate to your browser and type:
+#
+    http://[PUBLIC_IP]/wordpress
+
+This will bring us to the wordPress installation page  as shown:
+
+[IMAGE AVAILABLE FOR UPLOAD]
+
+6. We will configure the database on the wordpress installation page using the following details. (Note: the details were used to configure MYSQL)
+
+**Database Name**: wp
+**Username**: wp_user
+**password**: <the strong password>
+**host**: local host
+
+Click **Submit**
+
+We may see the following error:
+
+[UPLOAD WP ERROR MESSAGE]
+
+We will rectify the error by manually creating the wp-config.php file. Copy the PHP script in the dialogue box, and run the following commands to create a text editor named `wp-config.php` paste the script onto the text editor and save the file.
+
+#
+    cd /var/www/html/wordpress
+
+#
+    vi wp-config.php
+
+Then click **run the installation**
+
+We will be taken to the next page, where we ae requred to fill details for the website.(Be mindful to use a strong password)
+[IMAGE UPLOAD]
+[IMAGE UPLOAD FILLED DETAILS]
+
+After filling the required details, Click **Install Wordpress**
+You will get the success page from where you can log in to wordpress after filling the required username and password.SS
+
+[IMAGE UPLOAD]
+
+
+
+&nbsp;
+
+## Step 5. Configure wordpress website to be served on the root path
+The root path, currently serves the Apache2 default page. Wordpress can be configured to be accessible on the root path. This can be achieved by modifying the apache2 configuration in the /etc/apache2/sites-available/
+
+#
+    cd /etc/apache2/sites-available/
+
+Listing the directory will reveal the following files:
+000-default.conf  default-ssl.conf
+
+The file we need to modify is the `000-default.conf` file. Use a text editor to open it:
+
+#
+    sudo vi 000-default.conf
+
+Modify the Documentroot as follows:
+
+`DocumentRoot /var/www/html/wordpress`
+
+
+We will restart the apache web server 
+
 #
     sudo systemctl restart apache2
-    
 
-## Step 5. Install SSL on the Website.
+&nbsp;    
+
+## Step 6. Link a domain to the website.
+We can either use Route 53 (AWS DNS) or purchase from a host.
+Set the the domain name as A record.
+You can set the TTL to 60seconds
+Point the the domain name to your elastic public IPv4 address.
+
+Modify your apache configuration file to contain the following:
+* ServerName examplewebsite.com (this is your domain name)
+* SeverAlias www.examplewebsite.com
+
+Remember to save the file and restart Apache2
+
+
+To complete this settings, visit your wordpress website, login and navigate to settings, then general. Change the WordPress Address URL and site Address URL to your domain name. Then click **Save** 
+
+## Step 7. Install SSL on the Website (Make the website secure)
 1. To install SSL on our website to secure it, we will first update the webserver, then install certbox with the following commands:
 #
     sudo apt-get update
@@ -150,4 +265,7 @@ Install MYSQL server
 2. Install ssl on the website with certbox
 #
     sudo certbot --apache
+
+Follow the prompt and fill the correct details
+
 ## Conclusion
