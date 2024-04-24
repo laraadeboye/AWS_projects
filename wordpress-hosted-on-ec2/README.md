@@ -61,6 +61,26 @@ Alternatively we can launch EC2 using the AWS CLI with the AWS CLI using the com
 
 
 ## Step 2. Install prerequisites. 
+
+1. Install Apache server on the Ubuntu machine
+We should have ssh-ed into the machine. We will install the Apache web server and SQL on our Ubuntu machine.
+
+First update the VM:
+#
+    sudo apt update -y
+
+Install Apache server on Ubuntu:
+#
+    sudo apt install apache2
+
+Word press is based on php and mysql runtime connectorInstall php runtime and php mysql connector:
+#
+    sudo apt install php libapache2-mod-php php-mysql
+
+Install MYSQL server
+#
+    sudo apt install mysql-server
+
 ##  Step 3. Configure MYSQL server and create a new database for wordpress
 ##   Step 4. Install and Configure wordPress.
 ## Step 5. Install SSL on the Website.
