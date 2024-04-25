@@ -93,7 +93,7 @@ To verify the installation of the Apache server, visit the public IP of the inst
 #
     http://[PUBLIC_IP]
 
-[IMAGE SAVED FOR UPLOAD]
+![Apache2 works](https://github.com/laraadeboye/AWS_projects/blob/main/wordpress-hosted-on-ec2/wp-images/Screenshot%202024-04-24%20223035.png)
 
 
 3. Word press is based on php and mysql runtime connector. Install php runtime and php mysql connector:
@@ -170,14 +170,14 @@ Running the ls command again will show a new folder called **wordpress** in the 
 4. Verify the move by listing the /var/www/html directory:
 #
     ls /var/www/html
-    SS
+    
 5. Navigate to your browser and type:
 #
     http://[PUBLIC_IP]/wordpress
 
 This will bring us to the wordPress installation page  as shown:
 
-[IMAGE AVAILABLE FOR UPLOAD]
+![wordpress installation page](https://github.com/laraadeboye/AWS_projects/blob/main/wordpress-hosted-on-ec2/wp-images/Screenshot%202024-04-24%20224854.png)
 
 6. We will configure the database on the wordpress installation page using the following details. (Note: the details were used to configure MYSQL)
 
@@ -190,7 +190,7 @@ Click **Submit**
 
 We may see the following error:
 
-[UPLOAD WP ERROR MESSAGE]
+![installation error](https://github.com/laraadeboye/AWS_projects/blob/main/wordpress-hosted-on-ec2/wp-images/Screenshot%202024-04-24%20230435.png)
 
 We will rectify the error by manually creating the wp-config.php file. Copy the PHP script in the dialogue box, and run the following commands to create a text editor named `wp-config.php` paste the script onto the text editor and save the file.
 
@@ -203,14 +203,20 @@ We will rectify the error by manually creating the wp-config.php file. Copy the 
 Then click **run the installation**
 
 We will be taken to the next page, where we ae requred to fill details for the website.(Be mindful to use a strong password)
-[IMAGE UPLOAD]
-[IMAGE UPLOAD FILLED DETAILS]
+![fill details01](https://github.com/laraadeboye/AWS_projects/blob/main/wordpress-hosted-on-ec2/wp-images/Screenshot%202024-04-24%20231933.png)
+
+&nbsp;
+
+![filled details](https://github.com/laraadeboye/AWS_projects/blob/main/wordpress-hosted-on-ec2/wp-images/Screenshot%202024-04-24%20232143b.png)
 
 After filling the required details, Click **Install Wordpress**
-You will get the success page from where you can log in to wordpress after filling the required username and password.SS
+You will get the success page from where you can log in to wordpress after filling the required username and password.
 
-[IMAGE UPLOAD]
+![Installation success](https://github.com/laraadeboye/AWS_projects/blob/main/wordpress-hosted-on-ec2/wp-images/Screenshot%202024-04-24%20232226.png)
+&nbsp;
 
+Navigate to the dashboard as shown and install necessary plugins to deliver your content as necessary.
+![Wordpress dashboard](https://github.com/laraadeboye/AWS_projects/blob/main/wordpress-hosted-on-ec2/wp-images/Screenshot%202024-04-24%20232226.png)
 
 
 &nbsp;
