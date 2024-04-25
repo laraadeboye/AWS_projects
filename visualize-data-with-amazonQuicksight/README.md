@@ -7,7 +7,7 @@
 
 
 For this project, I will be using a list of data containing Amazon's best selling items.
-The data was obtained from a data source called [Bright Data](https://brightdata.com/). Note that this data has been scraped and cleaned up. The data can be downloaded from this repo [link]
+The data was obtained from a data source called [Bright Data](https://brightdata.com/). Note that this data has been scraped and cleaned up. The data can be downloaded from this ][repo](https://github.com/laraadeboye/AWS_projects/tree/main/visualize-data-with-amazonQuicksight)
 
 
 
@@ -24,7 +24,7 @@ Step 4. Create Visualizations
 
 
 ## Step 1. Download a dataset of 50,000 best-selling Amazon products 
-The data containing Amazon best selling items can be downloaded from [this repo](link) (This data was obtained from [Brightdata](https://brightdata.com/) through [tech with Lucy](https://github.com/techwithlucy/youtube/tree/main/2-s3-quicksight))
+The data containing Amazon best selling items can be downloaded from [this repo](https://github.com/laraadeboye/AWS_projects/tree/main/visualize-data-with-amazonQuicksight) (This data was obtained from [Brightdata](https://brightdata.com/) through [tech with Lucy](https://github.com/techwithlucy/youtube/tree/main/2-s3-quicksight))
 
 &nbsp;
 
