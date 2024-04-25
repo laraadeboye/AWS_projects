@@ -269,3 +269,5 @@ To complete this settings, visit your wordpress website, login and navigate to s
 Follow the prompt and fill the correct details
 
 ## Conclusion
+
+In this project, we designed and implemented a solution using AWS EC2. We launched an EC2 instance with appropriate resources, configured a LAMP stack (Linux, Apache, MySQL, PHP) to run WordPress.
