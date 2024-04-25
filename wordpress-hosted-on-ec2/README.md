@@ -216,7 +216,7 @@ You will get the success page from where you can log in to wordpress after filli
 &nbsp;
 
 Navigate to the dashboard as shown and install necessary plugins to deliver your content as necessary.
-![Wordpress dashboard](https://github.com/laraadeboye/AWS_projects/blob/main/wordpress-hosted-on-ec2/wp-images/Screenshot%202024-04-24%20232226.png)
+![Wordpress dashboard](https://github.com/laraadeboye/AWS_projects/blob/main/wordpress-hosted-on-ec2/wp-images/Screenshot%202024-04-24%20233307.png)
 
 
 &nbsp;
