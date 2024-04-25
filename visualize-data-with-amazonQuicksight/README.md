@@ -7,7 +7,7 @@
 
 
 For this project, I will be using a list of data containing Amazon's best selling items.
-The data was obtained from a data source called [Bright Data](https://brightdata.com/). Note that this data has been scraped and cleaned up. The data can be downloaded from this ][repo](https://github.com/laraadeboye/AWS_projects/tree/main/visualize-data-with-amazonQuicksight)
+The data was obtained from a data source called [Bright Data](https://brightdata.com/). Note that this data has been scraped and cleaned up. The data can be downloaded from this [repo](https://github.com/laraadeboye/AWS_projects/tree/main/visualize-data-with-amazonQuicksight)
 
 
 
