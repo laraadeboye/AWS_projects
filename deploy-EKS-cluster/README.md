@@ -1,8 +1,8 @@
 # Deploying and Scaling an Amazon EKS Cluster
 
-In this lab, you'll learn how to deploy an Amazon EKS cluster, deploy a sample application, and scale the cluster using the Kubernetes Horizontal Pod Autoscaler (HPA).
+In this project, you'll learn how to deploy an Amazon EKS cluster, deploy a sample application, and scale the cluster using the Kubernetes Horizontal Pod Autoscaler (HPA).
 
-**Step 1: Installing the required tools**
+**Step 1: Install the required tools**
 
 1. Install and configure the [AWS CLI](https://docs.aws.amazon.com/eks/latest/userguide/install-awscli.html)
 
@@ -34,7 +34,7 @@ sudo mv /tmp/eksctl /usr/local/bin
 
 Save the above script as `eksctl.sh` then run `chmod +x eksctl.sh` and `sudo sh eksctl.sh`
 
-**Step 2: Creating an EKS Cluster**
+**Step 2: Create an EKS Cluster**
 
 1. Create a new Amazon EKS cluster using the `eksctl` command:
 
@@ -44,7 +44,7 @@ eksctl create cluster --name my-eks-cluster --region us-east-1 --nodegroup-name 
 
 Replace `my-eks-cluster` and `us-east-1` with your preferred cluster name and AWS region.
 
-**Step 3: Deploying a Sample Application**
+**Step 3: Deploy a Sample nginx Application**
 
 1. Create a new file named `deployment.yaml` with the following content:
 
@@ -92,7 +92,7 @@ kubectl get services my-service
 
 You can access the sample application using the external IP address and port number.
 
-**Step 5: Setting up Horizontal Pod Autoscaler (HPA)**
+**Step 5: Set up Horizontal Pod Autoscaler (HPA)**
 
 1. Create a new file named `hpa.yaml` with the following content:
 
