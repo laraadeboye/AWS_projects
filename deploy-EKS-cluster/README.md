@@ -58,7 +58,7 @@ spec:
     matchLabels:
       app: nginx
   replicas: 2
-  template:
+  template
     metadata:
       labels:
         app: nginx
